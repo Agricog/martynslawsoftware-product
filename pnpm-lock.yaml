@@ -21,6 +21,19 @@ importers:
         specifier: ^5.7.0
         version: 5.9.3
 
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: ^4.3.0
+        version: 4.3.6
+    devDependencies:
+      '@martynslaw/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+
   packages/tsconfig: {}
 
 packages:
@@ -75,6 +88,9 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
 snapshots:
 
   '@turbo/darwin-64@2.9.6':
@@ -113,3 +129,5 @@ snapshots:
   typescript@5.9.3: {}
 
   undici-types@6.21.0: {}
+
+  zod@4.3.6: {}
