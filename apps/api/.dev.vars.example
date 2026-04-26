@@ -1,0 +1,11 @@
+# Local development variables template.
+#
+# Copy this file to .dev.vars (sibling, gitignored) and fill in real
+# values. .dev.vars is consumed by `wrangler dev` to provide variables
+# and secrets to the local Worker, mirroring how Cloudflare provides
+# them in production.
+#
+# Production vars are set in wrangler.jsonc under `vars` (non-secret)
+# or via `wrangler secret put NAME` (secrets — never committed).
+
+ENVIRONMENT=development
