@@ -27,23 +27,23 @@ packages/
 
 ## Stack
 
-| Layer | Choice |
-|---|---|
-| Frontend | React 18, Vite, TypeScript, Tailwind CSS v4 |
-| Routing | TanStack Router |
-| Data layer | TanStack Query + tRPC |
-| Backend | Hono on Cloudflare Workers |
-| Database | Neon Postgres (EU) via Cloudflare Hyperdrive |
-| ORM | Drizzle |
-| Auth | Clerk |
-| Storage | Cloudflare R2 |
-| Email | Resend |
-| Payments | Stripe |
-| PDF generation | @react-pdf/renderer |
-| Validation | Zod |
-| Error tracking | Sentry |
-| Testing | Vitest, Playwright, MSW |
-| CI/CD | GitHub Actions |
+| Layer          | Choice                                       |
+| -------------- | -------------------------------------------- |
+| Frontend       | React 18, Vite, TypeScript, Tailwind CSS v4  |
+| Routing        | TanStack Router                              |
+| Data layer     | TanStack Query + tRPC                        |
+| Backend        | Hono on Cloudflare Workers                   |
+| Database       | Neon Postgres (EU) via Cloudflare Hyperdrive |
+| ORM            | Drizzle                                      |
+| Auth           | Clerk                                        |
+| Storage        | Cloudflare R2                                |
+| Email          | Resend                                       |
+| Payments       | Stripe                                       |
+| PDF generation | @react-pdf/renderer                          |
+| Validation     | Zod                                          |
+| Error tracking | Sentry                                       |
+| Testing        | Vitest, Playwright, MSW                      |
+| CI/CD          | GitHub Actions                               |
 
 ## Requirements
 
