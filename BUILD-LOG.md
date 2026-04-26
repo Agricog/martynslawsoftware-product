@@ -31,27 +31,27 @@ Derived from the marketing site's build log plus product-specific additions.
 
 ## Stack snapshot (locked Chat 1)
 
-| Layer | Choice |
-|---|---|
-| Frontend | React 18 + Vite + TypeScript + Tailwind v4 |
-| Frontend hosting | Cloudflare Pages → `app.martynslawsoftware.co.uk` |
-| Routing | TanStack Router |
-| Data layer | TanStack Query + tRPC |
-| Backend | Hono on Cloudflare Workers |
-| DB connection | Cloudflare Hyperdrive |
-| Database | Neon Postgres (EU region) |
-| ORM | Drizzle |
-| Validation | Zod |
-| Auth | Clerk |
-| Storage | Cloudflare R2 |
-| Email | Resend |
-| Payments | Stripe |
-| PDF | `@react-pdf/renderer` |
-| Background jobs | Cloudflare Queues + Cron Triggers |
-| Errors | Sentry |
-| Testing | Vitest + Playwright + MSW |
-| CI | GitHub Actions |
-| Security scanning | Dependabot + Snyk + CodeQL |
+| Layer             | Choice                                            |
+| ----------------- | ------------------------------------------------- |
+| Frontend          | React 18 + Vite + TypeScript + Tailwind v4        |
+| Frontend hosting  | Cloudflare Pages → `app.martynslawsoftware.co.uk` |
+| Routing           | TanStack Router                                   |
+| Data layer        | TanStack Query + tRPC                             |
+| Backend           | Hono on Cloudflare Workers                        |
+| DB connection     | Cloudflare Hyperdrive                             |
+| Database          | Neon Postgres (EU region)                         |
+| ORM               | Drizzle                                           |
+| Validation        | Zod                                               |
+| Auth              | Clerk                                             |
+| Storage           | Cloudflare R2                                     |
+| Email             | Resend                                            |
+| Payments          | Stripe                                            |
+| PDF               | `@react-pdf/renderer`                             |
+| Background jobs   | Cloudflare Queues + Cron Triggers                 |
+| Errors            | Sentry                                            |
+| Testing           | Vitest + Playwright + MSW                         |
+| CI                | GitHub Actions                                    |
+| Security scanning | Dependabot + Snyk + CodeQL                        |
 
 Adding a dependency outside this list = a logged decision. Either accept the new line in the table, or use what's already there.
 
@@ -86,6 +86,7 @@ Adding a dependency outside this list = a logged decision. Either accept the new
 **Context:** Marketing site launched 25 Apr. User instruction: "premium product, no corners cut." Single-instruction mandate — every architectural decision optimises for that.
 
 **Decisions locked:**
+
 - Stack snapshot above.
 - Repo name: `martynslawsoftware-product`.
 - Subdomain: `app.martynslawsoftware.co.uk` (set up later, after Cloudflare Pages project exists).
@@ -93,17 +94,20 @@ Adding a dependency outside this list = a logged decision. Either accept the new
 - Build sequence: 14 batches planned, 12–16 weeks realistic.
 
 **Batch 1: workspace bootstrap.**
+
 - 6 files, all NEW: `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `.gitignore`, `.nvmrc`, `README.md`.
 - Node 22 LTS pinned, pnpm 9.15 pinned via `packageManager` field.
 - Turborepo 2.x task pipeline configured with build/dev/lint/test/typecheck/clean.
 - No build failures.
 
 **Batch 2: governance + shared TS config.**
+
 - 6 files, all NEW: `BUILD-LOG.md`, `ARCHITECTURE.md`, `SECURITY.md`, `packages/tsconfig/package.json`, `packages/tsconfig/base.json`, `packages/tsconfig/react.json`.
 - TS config is maximum strict: `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature` all on. Codifies "no shortcuts" at the type level.
 - No build failures expected.
 
 **Lessons / patterns codified:**
+
 - BUILD-LOG, ARCHITECTURE, SECURITY are the three governance docs at repo root.
 - Internal package naming convention: `@martynslaw/<name>` scope.
 - TS config package exposes named entry points (`base.json`, `react.json`, `node.json`, `workers.json`) — packages extend the relevant one, never the bare `base.json` if a more specific config fits.
