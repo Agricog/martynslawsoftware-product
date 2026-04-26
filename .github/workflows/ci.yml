@@ -1,0 +1,87 @@
+name: CI
+
+# Runs on every push to main and every pull request targeting main.
+# Verifies: format, types, lint, build, and dependency security audit.
+# Failures block merges via branch protection (configured in repo settings).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs on the same branch when a new commit is pushed.
+# Saves CI minutes and surfaces the latest result faster.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Default to read-only permissions; jobs that need more must opt in explicitly.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Format · Types · Lint · Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        # Version is read from the packageManager field in package.json.
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        # --frozen-lockfile fails if pnpm-lock.yaml is out of sync with
+        # package.json. This catches lockfile drift before it ships.
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Type-check all workspaces
+        run: pnpm typecheck
+
+      - name: Lint all workspaces
+        run: pnpm lint
+
+      - name: Build all workspaces
+        run: pnpm build
+
+  audit:
+    name: Dependency security audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Audit dependencies (high severity and above)
+        # Fails the build if any high or critical advisory exists in the
+        # resolved dependency graph. Lower-severity issues are surfaced
+        # by Dependabot for review without blocking CI.
+        run: pnpm audit --audit-level=high
