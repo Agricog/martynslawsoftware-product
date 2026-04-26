@@ -1,0 +1,74 @@
+# Dependabot — automated dependency update PRs.
+# https://docs.github.com/en/code-security/dependabot
+#
+# Runs weekly. Groups related updates to keep PR noise manageable.
+# Security advisories are filed immediately regardless of schedule.
+
+version: 2
+updates:
+  # ────────────────────────────────────────────────────────────────────
+  # Root workspace (and all child workspaces — pnpm support is implicit
+  # because the lockfile lives at repo root).
+  # ────────────────────────────────────────────────────────────────────
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    groups:
+      # TypeScript and its types updated together.
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+        update-types:
+          - minor
+          - patch
+      # Build tooling minor/patch updates grouped.
+      build-tooling:
+        patterns:
+          - "turbo"
+          - "vite"
+          - "@vitejs/*"
+          - "prettier"
+          - "eslint"
+          - "@eslint/*"
+        update-types:
+          - minor
+          - patch
+      # Test tooling.
+      test-tooling:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@playwright/*"
+          - "playwright"
+          - "msw"
+        update-types:
+          - minor
+          - patch
+
+  # ────────────────────────────────────────────────────────────────────
+  # GitHub Actions versions.
+  # ────────────────────────────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(actions)"
