@@ -1,0 +1,36 @@
+# Files Prettier will not format.
+# Mirrors most of .gitignore but kept separate because some ignored
+# git paths (e.g. coverage reports) we still want to format if checked in.
+
+# Build outputs
+node_modules/
+dist/
+build/
+out/
+.vite/
+.turbo/
+.wrangler/
+.next/
+
+# Generated
+*.tsbuildinfo
+
+# Lockfiles — owned by the package manager, never hand-edit
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Test outputs
+coverage/
+playwright-report/
+test-results/
+
+# Vendored / static assets
+public/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
