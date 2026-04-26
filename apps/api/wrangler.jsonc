@@ -1,0 +1,28 @@
+{
+  // Cloudflare Workers configuration.
+  // Custom domain routes and bindings (R2, Hyperdrive, KV, secrets)
+  // are added in later batches as features are introduced.
+  //
+  // Schema reference: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "martynslaw-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Workers Logs — free tier observability. Captures request logs,
+  // console output, and exceptions. Visible in the Cloudflare dashboard
+  // and exportable to R2 via Logpush in a later batch.
+  "observability": {
+    "logs": {
+      "enabled": true
+    }
+  },
+
+  // Default vars (non-secret). Overridden per-environment when staging
+  // and production environments are wired up in Batch 5b.
+  "vars": {
+    "ENVIRONMENT": "development"
+  }
+}
