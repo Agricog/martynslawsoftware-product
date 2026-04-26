@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+/*
+ * Theme tokens — Tailwind v4 inline config.
+ *
+ * Brand palette intentionally minimal at this stage. The full design system
+ * (typography scale, spacing scale, brand colour ramps, motion tokens) lands
+ * in a dedicated batch once we have real screens that need it.
+ *
+ * Reference: https://tailwindcss.com/docs/theme
+ */
+@theme {
+  --color-brand-navy: #0a1628;
+  --color-brand-navy-soft: #1a2942;
+  --color-brand-amber: #d97706;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
+}
+
+/*
+ * Base resets layered on top of Tailwind's preflight.
+ * Keep this block tiny — components own their own styling.
+ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-amber);
+    outline-offset: 2px;
+  }
+}
