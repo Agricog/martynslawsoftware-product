@@ -131,6 +131,7 @@ The current operator is a sole trader. Out-of-hours availability is best-effort.
 - **Sentry events**: 30 days.
 
 On subscription cancellation:
+
 - 30 days grace period (data retained, account read-only).
 - Day 31: customer can request data export (CSV + PDF evidence packs) — fulfilled within 14 days.
 - Day 90: hard delete of all tenant data, except audit log and billing records (retained 7 years for legal/tax).
@@ -164,17 +165,17 @@ Data subject requests: `privacy@martynslawsoftware.co.uk`.
 
 Status as of repo Batch 2:
 
-| Control | Status |
-|---|---|
-| HTTPS-only (HSTS) | Pending — set up at app subdomain post-v1.0 |
-| MFA mandatory for staff | Pending — Clerk policy at first user creation |
-| Dependabot | Pending — Batch 3 |
-| CodeQL | Pending — Batch 3 |
-| Snyk | Pending — Batch 3 |
-| Sentry PII scrubbing | Pending — Batch 3 (API foundation) |
-| External pen test | Pre-launch — booked when v1.0 feature-complete |
-| ICO registration | Pre-launch — operator action item |
-| DPA template | Pre-launch — operator action item |
-| Privacy policy v2 (product addendum) | Pre-launch — operator action item |
+| Control                              | Status                                         |
+| ------------------------------------ | ---------------------------------------------- |
+| HTTPS-only (HSTS)                    | Pending — set up at app subdomain post-v1.0    |
+| MFA mandatory for staff              | Pending — Clerk policy at first user creation  |
+| Dependabot                           | Pending — Batch 3                              |
+| CodeQL                               | Pending — Batch 3                              |
+| Snyk                                 | Pending — Batch 3                              |
+| Sentry PII scrubbing                 | Pending — Batch 3 (API foundation)             |
+| External pen test                    | Pre-launch — booked when v1.0 feature-complete |
+| ICO registration                     | Pre-launch — operator action item              |
+| DPA template                         | Pre-launch — operator action item              |
+| Privacy policy v2 (product addendum) | Pre-launch — operator action item              |
 
 Items marked "Pre-launch" are tracked in the operator's `LAUNCH-CHECKLIST.md` (separate from this code repo) and not blocked by code work, but block the first paid customer onboarding.
