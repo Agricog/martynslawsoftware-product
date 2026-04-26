@@ -1,0 +1,28 @@
+{
+  "name": "@martynslaw/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Martyn's Law Software API. Hono on Cloudflare Workers.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo .wrangler"
+  },
+  "dependencies": {
+    "@martynslaw/shared": "workspace:*",
+    "hono": "^4.12.0",
+    "zod": "^4.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260426.0",
+    "@martynslaw/tsconfig": "workspace:*",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.85.0"
+  }
+}
