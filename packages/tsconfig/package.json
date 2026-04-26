@@ -1,0 +1,14 @@
+{
+  "name": "@martynslaw/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared TypeScript configurations for the Martyn's Law Software product monorepo. Consumed by every other package via 'extends'.",
+  "license": "UNLICENSED",
+  "files": [
+    "base.json",
+    "react.json"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
