@@ -1,0 +1,10 @@
+# pnpm workspace configuration.
+#
+# Apps are end-user deployables (web SPA, API worker).
+# Packages are internal shared libraries consumed by apps.
+#
+# Both globs match zero or more children — empty until later batches.
+
+packages:
+  - "apps/*"
+  - "packages/*"
