@@ -52,6 +52,7 @@ Derived from the marketing site's build log plus product-specific additions.
 **Fix:** Rewrote `ci.yml` with double-quoted YAML strings. Re-ran full pipeline locally against a complete mirror. Green on next push.
 
 **Prevention rule:**
+
 > Before declaring a batch ready, the local test mirror must contain **every** file the batch ships, not a subset. Run the full CI pipeline (install · format · typecheck · lint · build · audit) against the complete mirror. If any new file lives under a directory the format check covers, that file gets checked locally first.
 
 ### Incident 2 — Communication breakdown during file uploads
@@ -63,6 +64,7 @@ Derived from the marketing site's build log plus product-specific additions.
 **Fix:** Switched to one-file-at-a-time delivery, downloadable file per message, exact path field text to type, exact commit message text. Communication unblocked.
 
 **Prevention rule:**
+
 > When the user signals confusion (especially with explicit frustration), immediately switch modes: one file per message, downloadable file (not pasted code in chat), exact instructions for filename/path/commit message, no jargon, no batch references. Do not attempt to "explain better" — just simplify the unit of work.
 
 ---
@@ -85,12 +87,12 @@ No incidents. Hono 4.12 + Wrangler 4.85 + workers-types 4.2026 all current. Work
 
 **Settings that were not the wizard defaults:**
 
-| Field | Wizard default | Required value | Why |
-|---|---|---|---|
-| Project name | `martynslawsoftware-product` (repo name) | `martynslaw-api` | Must match `name` in `wrangler.jsonc` |
-| Build command | `pnpm run build` | `pnpm install --frozen-lockfile && pnpm --filter @martynslaw/api build` | Monorepo: install at root, build only the API package |
-| Deploy command | `npx wrangler deploy` | `pnpm --filter @martynslaw/api exec wrangler deploy` | Wrangler must run from inside `apps/api/` where `wrangler.jsonc` lives |
-| Non-production branch deploy | `npx wrangler versions upload` | `pnpm --filter @martynslaw/api exec wrangler versions upload` | Same reason as above |
+| Field                        | Wizard default                           | Required value                                                          | Why                                                                    |
+| ---------------------------- | ---------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Project name                 | `martynslawsoftware-product` (repo name) | `martynslaw-api`                                                        | Must match `name` in `wrangler.jsonc`                                  |
+| Build command                | `pnpm run build`                         | `pnpm install --frozen-lockfile && pnpm --filter @martynslaw/api build` | Monorepo: install at root, build only the API package                  |
+| Deploy command               | `npx wrangler deploy`                    | `pnpm --filter @martynslaw/api exec wrangler deploy`                    | Wrangler must run from inside `apps/api/` where `wrangler.jsonc` lives |
+| Non-production branch deploy | `npx wrangler versions upload`           | `pnpm --filter @martynslaw/api exec wrangler versions upload`           | Same reason as above                                                   |
 
 **Settings that stayed default (don't change these):**
 
@@ -130,14 +132,14 @@ The Chat 1 prevention rule about switching modes when user signals confusion hel
 
 ## Where we are at end of Chat 2
 
-| Batch | Description | Status |
-|---|---|---|
-| 1 | Workspace bootstrap | ✅ Green |
-| 2 | Governance docs + tsconfig package | ✅ Green |
-| 3 | CI pipeline + tooling baseline | ✅ Green |
-| 4 | `packages/shared` (Zod, branded types, constants) | ✅ Green |
-| 5a | `apps/api` skeleton (Hono on Workers) | ✅ Green |
-| 5b | First Cloudflare deployment | ✅ Live at `martynslaw-api.micks43.workers.dev` |
+| Batch | Description                                       | Status                                          |
+| ----- | ------------------------------------------------- | ----------------------------------------------- |
+| 1     | Workspace bootstrap                               | ✅ Green                                        |
+| 2     | Governance docs + tsconfig package                | ✅ Green                                        |
+| 3     | CI pipeline + tooling baseline                    | ✅ Green                                        |
+| 4     | `packages/shared` (Zod, branded types, constants) | ✅ Green                                        |
+| 5a    | `apps/api` skeleton (Hono on Workers)             | ✅ Green                                        |
+| 5b    | First Cloudflare deployment                       | ✅ Live at `martynslaw-api.micks43.workers.dev` |
 
 **Open / deferred:**
 
