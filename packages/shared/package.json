@@ -1,0 +1,31 @@
+{
+  "name": "@martynslaw/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared types, Zod schemas, and constants used across the web and api workspaces.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "zod": "^4.3.0"
+  },
+  "devDependencies": {
+    "@martynslaw/tsconfig": "workspace:*",
+    "typescript": "^5.7.0"
+  }
+}
