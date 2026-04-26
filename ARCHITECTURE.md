@@ -110,6 +110,7 @@ Append entries chronologically. Each entry: date, title, context, decision, cons
 **Decision.** Workers. PDF generation moved to `@react-pdf/renderer` (pure JS, runs in Workers) to remove the headless-Chrome motivation for Fly.
 
 **Consequences.**
+
 - Single Cloudflare account holds all infra (Pages, Workers, R2, Queues, Hyperdrive). One vendor relationship.
 - DB connections from edge handled by Hyperdrive — adds dependency.
 - Workers runtime constraints (no native Node APIs, 30s wall time on paid plan, 128MB memory) shape what can run inline vs. in Queues.
@@ -122,6 +123,7 @@ Append entries chronologically. Each entry: date, title, context, decision, cons
 **Decision.** Clerk. SOC 2 Type 2, MFA built-in, audit logs included, GDPR endpoints available, enterprise SSO when needed (phase 2 sales).
 
 **Consequences.**
+
 - Recurring cost (~£0–25/mo at MVP scale, more at growth scale). Logged as accepted operational cost.
 - User identity lives outside our Postgres — we sync via Clerk webhooks into `users` table for foreign key integrity.
 - Lock-in non-trivial (migrating auth providers is rare but expensive). Mitigation: keep our `users` table populated with email + name so we'd retain the user record on migration.
@@ -133,6 +135,7 @@ Append entries chronologically. Each entry: date, title, context, decision, cons
 **Decision.** Neon Postgres in EU region.
 
 **Consequences.**
+
 - Real Postgres = mature ecosystem, real foreign keys, proper indexing, branching for dev environments.
 - D1 rejected: SQLite limits (write contention), eventual consistency in replication, fewer ops engineers know it.
 - Supabase rejected: bundled features (auth, storage) we don't need; we already have Clerk and R2.
@@ -145,6 +148,7 @@ Append entries chronologically. Each entry: date, title, context, decision, cons
 **Decision.** Enable `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature` from day 1. These are typically deferred because they catch real bugs that need explicit handling.
 
 **Consequences.**
+
 - More verbose code in some places (explicit array bounds checks, explicit `?: T | undefined`).
 - Catches bugs that would otherwise hit production.
 - Cannot be retrofitted easily once a codebase has thousands of files — must be on from day 1.
@@ -156,6 +160,7 @@ Append entries chronologically. Each entry: date, title, context, decision, cons
 **Decision.** No tenant table uses hard delete. `deleted_at` column on every table. Audit log captures every mutation.
 
 **Consequences.**
+
 - Every query needs `WHERE deleted_at IS NULL` (handled via Drizzle base query helper).
 - Disk usage grows unbounded — periodic anonymise-and-purge job for soft-deleted rows older than retention policy.
 - GDPR right-to-erasure handled via explicit data export + hard delete flow, separate from normal soft-delete.
