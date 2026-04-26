@@ -1,29 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalDependencies": [
-    ".env",
-    ".env.local",
-    "tsconfig.json"
-  ],
-  "globalEnv": [
-    "NODE_ENV",
-    "CI"
-  ],
+  "globalDependencies": [".env", ".env.local", "tsconfig.json"],
+  "globalEnv": ["NODE_ENV", "CI"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [
-        "dist/**",
-        "build/**",
-        ".vite/**",
-        ".wrangler/**",
-        ".turbo/**"
-      ],
-      "env": [
-        "VITE_*",
-        "PUBLIC_*"
-      ]
+      "outputs": ["dist/**", "build/**", ".vite/**", ".wrangler/**", ".turbo/**"],
+      "env": ["VITE_*", "PUBLIC_*"]
     },
     "dev": {
       "cache": false,
